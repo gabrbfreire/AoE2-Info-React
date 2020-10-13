@@ -1,24 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import SearchCivs from "./SearchCivs/SearchCivs"
+import SearchUnits from "./SearchUnits/SearchUnits"
+import SearchStructures from "./SearchStructures/SearchStructures"
+import SearchTechnologies from "./SearchTechnologies/SearchTechnologies"
+import Select from './Select/Select';
 
 function App() {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Age of Empires II Info</h1>
+      <Select />
+      <SearchCivs></SearchCivs>
+      <SearchUnits></SearchUnits>
+      <SearchStructures></SearchStructures>
+      <SearchTechnologies></SearchTechnologies>
     </div>
   );
 }

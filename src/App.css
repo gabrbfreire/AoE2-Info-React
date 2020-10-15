@@ -9,3 +9,7 @@
 .form-civs{
   display: block;
 }
+
+#types{
+  width: 200px;
+}

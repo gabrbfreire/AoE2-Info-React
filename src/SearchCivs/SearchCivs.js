@@ -32,18 +32,25 @@ function SearchCivs() {
   }
 
   const createList = () => {
-    let listTitle = '<table className="data-table"><tr><th>Name</th><th>Army Type</th><th>Team Bonus</th></tr>';
-    let listContent = resultData.map(item => "<tr><th>" + item.name + "</th><th>" + item.army_type + "</th><th>" + item.team_bonus + "</th></tr>");
-    return (listTitle + listContent.join(" ") + "</table>")
+    if (resultData.length > 0) {
+      let listTitle = '<table class="table"><thead class="thead-dark"><tr><th scope="col">Name</th><th scope="col">Army Type</th><th scope="col">Team Bonus</th></tr></thead><tbody>';
+      let listContent = resultData.map(item => "<tr><td>" + item.name + "</td><td>" + item.army_type + "</td><td>" + item.team_bonus + "</td></tr>");
+      return (listTitle + listContent.join(" ") + "</tbody></table>")
+    }
+
   }
 
   return (
     <>
-      <form onSubmit={searchCivs} className="form-civs">
-        <input type="text" value={query} onChange={(e) => setQuery(e.target.value)}></input>
-        <button type="submit">Search</button>
+      <form onSubmit={searchCivs} className="form-civs mt-2">
+        <div className="input-group mb-3">
+          <input type="text" className="form-control" placeholder="Civilization name" value={query} onChange={(e) => setQuery(e.target.value)}></input>
+          <div className="input-group-append">
+            <button type="submit" className="btn btn-dark">Search</button>
+          </div>
+        </div>
       </form>
-      <div dangerouslySetInnerHTML={{ __html: createList() }} />
+      <div className="list-div" dangerouslySetInnerHTML={{ __html: createList() }} />
     </>
   )
 }

@@ -9,13 +9,15 @@ import Select from './Select/Select';
 function App() {
 
   return (
-    <div className="App">
+    <div className="App text-center">
       <h1>Age of Empires II Info</h1>
-      <Select />
-      <SearchCivs></SearchCivs>
-      <SearchUnits></SearchUnits>
-      <SearchStructures></SearchStructures>
-      <SearchTechnologies></SearchTechnologies>
+      <div className="container justify-content-center">
+        <Select />
+        <SearchCivs></SearchCivs>
+        <SearchUnits></SearchUnits>
+        <SearchStructures></SearchStructures>
+        <SearchTechnologies></SearchTechnologies>
+      </div>
     </div>
   );
 }

@@ -4,13 +4,14 @@ function Select() {
 
   const changeSearch = (e) => {
     let type = e.target.value
-    console.log(typeof type)
+    console.log(type)
     switch (type) {
       case '0':
         document.getElementsByClassName("form-civs")[0].style.display = "block";
         document.getElementsByClassName("form-structures")[0].style.display = "none";
         document.getElementsByClassName("form-tech")[0].style.display = "none";
         document.getElementsByClassName("form-units")[0].style.display = "none";
+        break;
       case '1':
         document.getElementsByClassName("form-civs")[0].style.display = "none";
         document.getElementsByClassName("form-structures")[0].style.display = "none";
@@ -34,13 +35,24 @@ function Select() {
     }
   }
 
+  const activateItem = (e) => {
+    document.getElementsByClassName("dropdown-item")[0].className = "dropdown-item rounded";
+    document.getElementsByClassName("dropdown-item")[1].className = "dropdown-item rounded";
+    document.getElementsByClassName("dropdown-item")[2].className = "dropdown-item rounded";
+    document.getElementsByClassName("dropdown-item")[3].className = "dropdown-item rounded";
+    e.target.className = e.target.className + " active";
+    changeSearch(e);
+  }
+
   return (
-    <select name="types" id="types" onChange={(e) => changeSearch(e)}>
-      <option value="0">Civilizations</option>
-      <option value="1">Units</option>
-      <option value="2">Structures</option>
-      <option value="3">Technologies</option>
-    </select >
+    <div class="row d-flex justify-content-center">
+      <div name="types" id="types">
+        <option value="0" className="dropdown-item rounded active" onClick={(e) => activateItem(e)}>Civilizations</option>
+        <option value="1" className="dropdown-item" onClick={(e) => activateItem(e)}>Units</option>
+        <option value="2" className="dropdown-item" onClick={(e) => activateItem(e)}>Structures</option>
+        <option value="3" className="dropdown-item" onClick={(e) => activateItem(e)}>Technologies</option>
+      </div>
+    </div>
   )
 }
 

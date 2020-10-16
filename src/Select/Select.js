@@ -3,8 +3,7 @@ import React from "react";
 function Select() {
 
   const changeSearch = (e) => {
-    let type = e.target.value
-    console.log(type)
+    let type = e.target.value;
     switch (type) {
       case '0':
         document.getElementsByClassName("form-civs")[0].style.display = "block";
@@ -36,6 +35,10 @@ function Select() {
   }
 
   const activateItem = (e) => {
+    try {
+      document.getElementsByClassName("table")[0].remove();
+    } catch (e) { }
+
     document.getElementsByClassName("dropdown-item")[0].className = "dropdown-item rounded";
     document.getElementsByClassName("dropdown-item")[1].className = "dropdown-item rounded";
     document.getElementsByClassName("dropdown-item")[2].className = "dropdown-item rounded";
@@ -45,7 +48,7 @@ function Select() {
   }
 
   return (
-    <div class="row d-flex justify-content-center">
+    <div className="row d-flex justify-content-center">
       <div name="types" id="types">
         <option value="0" className="dropdown-item rounded active" onClick={(e) => activateItem(e)}>Civilizations</option>
         <option value="1" className="dropdown-item" onClick={(e) => activateItem(e)}>Units</option>

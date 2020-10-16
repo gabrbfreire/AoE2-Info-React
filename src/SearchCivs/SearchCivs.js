@@ -24,8 +24,6 @@ function SearchCivs() {
       } else {
         setData(data.civilizations);
       }
-
-      console.log(data.civilizations)
     } catch (err) {
       console.log(err);
     }
@@ -35,9 +33,8 @@ function SearchCivs() {
     if (resultData.length > 0) {
       let listTitle = '<table class="table"><thead class="thead-dark"><tr><th scope="col">Name</th><th scope="col">Army Type</th><th scope="col">Team Bonus</th></tr></thead><tbody>';
       let listContent = resultData.map(item => "<tr><td>" + item.name + "</td><td>" + item.army_type + "</td><td>" + item.team_bonus + "</td></tr>");
-      return (listTitle + listContent.join(" ") + "</tbody></table>")
+      return (listTitle + listContent.join(" ") + "</tbody></table>");
     }
-
   }
 
   return (

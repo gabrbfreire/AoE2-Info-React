@@ -4,6 +4,7 @@ function SearchStructures() {
 
   const [query, setQuery] = useState('');
   const [resultData, setData] = useState([]);
+  const [message, setMessage] = useState([]);
 
   const searchStructures = async (e) => {
     e.preventDefault();
@@ -19,19 +20,26 @@ function SearchStructures() {
     try {
       const response = await fetch(proxyUrl + url);
       const data = await response.json();
+      if (data.message !== undefined) {
+        setMessage(data.message);
+        return;
+      }
       if (data.structures === undefined) {
-        setData([data]);
+        if (data.length !== undefined) {
+          setData(data);
+        } else {
+          setData([data]);
+        }
       } else {
         setData(data.structures);
       }
-      console.log(resultData)
+      setMessage("");
     } catch (err) {
       console.log(err);
     }
   }
 
   const createList = () => {
-    console.log(resultData)
     if (resultData.length > 0) {
       let listTitle = '<table class="table"><thead class="thead-dark"><tr><th scope="col">Name</th><th scope="col">Hit Points</th><th scope="col">Armor</th><th scope="col">Build Time</th><th scope="col">Age</th></thead><tbody>';
       let listContent = resultData.map(item => "<tr><td>" + item.name + "</td><td>" + item.hit_points + "</td><td>" + item.armor + "</td><td>" + item.build_time + "</td><td>" + item.age + "</td>");
@@ -48,6 +56,7 @@ function SearchStructures() {
             <button type="submit" className="btn btn-dark">Search</button>
           </div>
         </div>
+        <p id="message">{message}</p>
       </form>
       <div className="list-div" dangerouslySetInnerHTML={{ __html: createList() }} />
     </>

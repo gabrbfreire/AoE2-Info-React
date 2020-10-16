@@ -4,6 +4,7 @@ function SearchUnits() {
 
   const [query, setQuery] = useState('');
   const [resultData, setData] = useState([]);
+  const [message, setMessage] = useState([]);
 
   const searchUnits = async (e) => {
     e.preventDefault();
@@ -19,11 +20,16 @@ function SearchUnits() {
     try {
       const response = await fetch(proxyUrl + url);
       const data = await response.json();
+      if (data.message !== undefined) {
+        setMessage(data.message);
+        return;
+      }
       if (data.units === undefined) {
         setData([data]);
       } else {
         setData(data.units);
       }
+      setMessage("");
     } catch (err) {
       console.log(err);
     }
@@ -32,7 +38,7 @@ function SearchUnits() {
   const createList = () => {
     if (resultData.length > 0) {
       let listTitle = '<table class="table"><thead class="thead-dark"><tr><th scope="col">Name</th><th scope="col">Attack</th><th scope="col">Attack Delay</th><th scope="col">Armor</th><th scope="col">Hit Points</th><th scope="col">Mov. Rate</th></tr></thead><tbody>';
-      let listContent = resultData.map(item => "<tr><td>" + item.name + "</td><td>" + function () { if (item.attack == undefined) { return ("-"); } else return (item.attack) }() + "</td><td>" + function () { if (item.attack_delay == undefined) { return ("-"); } else return (item.attack_delay) }() + "</td><td>" + item.armor + "</td><td>" + item.hit_points + "</td><td>" + function () { if (item.movement_rate == undefined) { return ("-"); } else return (item.movement_rate) }() + "</td></tr>");
+      let listContent = resultData.map(item => "<tr><td>" + item.name + "</td><td>" + function () { if (item.attack === undefined) { return ("-"); } else return (item.attack) }() + "</td><td>" + function () { if (item.attack_delay === undefined) { return ("-"); } else return (item.attack_delay) }() + "</td><td>" + item.armor + "</td><td>" + item.hit_points + "</td><td>" + function () { if (item.movement_rate === undefined) { return ("-"); } else return (item.movement_rate) }() + "</td></tr>");
       return (listTitle + listContent.join(" ") + "</tbody></table>");
     }
   }
@@ -46,6 +52,7 @@ function SearchUnits() {
             <button type="submit" className="btn btn-dark">Search</button>
           </div>
         </div>
+        <p id="message">{message}</p>
       </form>
       <div className="list-div" dangerouslySetInnerHTML={{ __html: createList() }} />
     </>

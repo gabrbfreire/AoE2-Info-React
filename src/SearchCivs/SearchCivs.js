@@ -4,6 +4,7 @@ function SearchCivs() {
 
   const [query, setQuery] = useState('');
   const [resultData, setData] = useState([]);
+  const [message, setMessage] = useState([]);
 
   const searchCivs = async (e) => {
     e.preventDefault();
@@ -19,11 +20,16 @@ function SearchCivs() {
     try {
       const response = await fetch(proxyUrl + url);
       const data = await response.json();
+      if (data.message !== undefined) {
+        setMessage(data.message);
+        return;
+      }
       if (data.civilizations === undefined) {
         setData([data]);
       } else {
         setData(data.civilizations);
       }
+      setMessage("");
     } catch (err) {
       console.log(err);
     }
@@ -46,6 +52,7 @@ function SearchCivs() {
             <button type="submit" className="btn btn-dark">Search</button>
           </div>
         </div>
+        <p id="message">{message}</p>
       </form>
       <div className="list-div" dangerouslySetInnerHTML={{ __html: createList() }} />
     </>

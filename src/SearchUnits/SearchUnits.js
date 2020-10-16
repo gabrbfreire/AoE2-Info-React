@@ -23,10 +23,7 @@ function SearchUnits() {
         setData([data]);
       } else {
         setData(data.units);
-
       }
-      console.log(data.units)
-      console.log(data);
     } catch (err) {
       console.log(err);
     }

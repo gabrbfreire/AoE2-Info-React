@@ -7,5 +7,3 @@ Technologies:
 * React
 
 Using Age Of Empires II API : https://age-of-empires-2-api.herokuapp.com/docs/
-
-Heroku link: https://aoe2-info.herokuapp.com

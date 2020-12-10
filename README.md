@@ -1,6 +1,6 @@
 # AoE2-Info-React
 
-Site that provides simple information about Age of Empires II
+Site that provides information about Age of Empires II
 
 Technologies:
 * Bootstrap
